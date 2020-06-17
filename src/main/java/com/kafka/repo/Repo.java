@@ -16,10 +16,15 @@ public class Repo {
 	@PersistenceContext
 	EntityManager em;
 	
-	public void persist(Object obj)
+	public Session getSession()
 	{
-	   em.persist(obj);
+	   return (Session)em.getDelegate();
 	   //em.flush();
 	   
+	}
+	
+	public void save(Object object)
+	{
+		getSession().save(object);
 	}
 }
